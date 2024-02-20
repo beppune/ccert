@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ciaone</title>
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<script src="bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		
+	</div>
+	<script>
+		
+		function gallery(name, count) {
+			return { name, count };
+		}
+
+		window.addEventListener('load', ()=>{
+
+			const BASE_PATH = 'galleries';
+			const GALLERIES = [
+				gallery("gallery_1", 3)
+			];
+
+			let main = document.getElementById('main');
+			GALLERIES.forEach( (el) => {
+
+				for (let index = 1; index <= el.count; index++) {
+					let img = new Image(720);
+					img.src = `${BASE_PATH}/${el.name}/image_${index}.jpg`;
+					main.appendChild(img);
+				}
+			});
+
+
+		});
+
+	</script>
+</body>
+</html>
