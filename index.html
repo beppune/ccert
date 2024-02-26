@@ -4,12 +4,29 @@
 	<title>Ciaone</title>
 	<link rel="stylesheet" href="bootstrap.min.css" />
 	<script src="bootstrap.bundle.min.js"></script>
+	<style>
+		.w-33 {
+			width: 33%;
+		}
+	</style>
 </head>
 <body>
+	<div class="modal" id="carousel">
+		<div class="modal-dialog modal-fullscreen" keyboard>
+			<div class="modal-content">
+				<div class="modal-body">
+					<p>Body</p>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Home</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="main">
 		
 	</div>
 	<script>
+
+		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));;
 		
 		function gallery(name, count) {
 			return { name, count };
@@ -23,13 +40,25 @@
 			];
 
 			let main = document.getElementById('main');
+			main.classList.add('container')
 			GALLERIES.forEach( (el) => {
 
+				let row = document.createElement('div');
+				row.classList.add('row')
 				for (let index = 1; index <= el.count; index++) {
-					let img = new Image(720);
+					let img = new Image();
+					img.classList.add("w-33");
 					img.src = `${BASE_PATH}/${el.name}/image_${index}.jpg`;
-					main.appendChild(img);
+					img.setAttribute('role','button');
+					img.setAttribute('data-bs-toggl','modal');
+					img.setAttribute('data-bs-target','carousel');
+					img.addEventListener('click', ()=>{
+						console.log("modal");
+						Modal.show();
+					});
+					row.appendChild(img);
 				}
+				main.append(row)
 			});
 
 
