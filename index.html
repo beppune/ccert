@@ -15,7 +15,27 @@
 		<div class="modal-dialog modal-fullscreen" keyboard>
 			<div class="modal-content">
 				<div class="modal-body">
-					<p>Body</p>
+					
+					<!-- SLIDES -->
+
+					<div id="slides" class="carousel slide">
+						<div class="carousel-inner" id="carousel-inner">
+							
+							<!-- IMAGES PER GALLERY -->
+
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#slides" data-bs-slide="prev">
+						  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						  <span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#slides" data-bs-slide="next">
+						  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+						  <span class="visually-hidden">Next</span>
+						</button>
+					  </div>
+
+					<!-- /SLIDES-->
+
 				</div>
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Home</button>
 			</div>
@@ -41,24 +61,42 @@
 
 			let main = document.getElementById('main');
 			main.classList.add('container')
-			GALLERIES.forEach( (el) => {
+			GALLERIES.forEach( (GALLERY) => {
 
 				let row = document.createElement('div');
 				row.classList.add('row')
-				for (let index = 1; index <= el.count; index++) {
-					let img = new Image();
-					img.classList.add("w-33");
-					img.src = `${BASE_PATH}/${el.name}/image_${index}.jpg`;
-					img.setAttribute('role','button');
-					img.setAttribute('data-bs-toggl','modal');
-					img.setAttribute('data-bs-target','carousel');
-					img.addEventListener('click', ()=>{
-						console.log("modal");
-						Modal.show();
-					});
-					row.appendChild(img);
-				}
-				main.append(row)
+
+				let img = new Image();
+				img.classList.add("w-33");
+				img.setAttribute('role','button');
+				img.src = `${BASE_PATH}/${GALLERY.name}.jpg`;
+				img.addEventListener('click', ()=>{
+
+					let carousel = document.getElementById('carousel-inner');
+					
+					//Empty previous gallery content
+					while (carousel.firstChild) carousel.removeChild(carousel.firstChild);
+
+					
+					for (let index = 1; index <= GALLERY.count; index++) {
+						let slide = new Image();
+						slide.classList.add("w-100");
+						slide.src = `${BASE_PATH}/${GALLERY.name}/image_${index}.jpg`;
+
+						//Create container 
+						let div = document.createElement('div');
+						div.classList.add('carousel-item');
+						if( index == 1) div.classList.add('active');
+						div.append(slide);
+						carousel.append(div);
+
+					}
+
+					Modal.show();
+				});
+
+				row.append(img);
+				main.append(row);
 			});
 
 
