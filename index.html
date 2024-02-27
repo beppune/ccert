@@ -8,6 +8,10 @@
 		.w-33 {
 			width: 33%;
 		}
+
+		.w-19in {
+			width: 1280px;
+		}
 	</style>
 </head>
 <body>
@@ -41,7 +45,8 @@
 			</div>
 		</div>
 	</div>
-	<div id="main">
+
+	<div id="main" class="container-fluid mx-auto mt-2">
 		
 	</div>
 	<script>
@@ -56,15 +61,22 @@
 
 			const BASE_PATH = 'galleries';
 			const GALLERIES = [
-				gallery("gallery_1", 3)
+				gallery("gallery_1", 3),
+				gallery("gallery_2", 3),
+				gallery("gallery_3", 3),
+				gallery("gallery_4", 3)
 			];
 
 			let main = document.getElementById('main');
 			main.classList.add('container')
-			GALLERIES.forEach( (GALLERY) => {
-
-				let row = document.createElement('div');
-				row.classList.add('row')
+			let row;
+			GALLERIES.forEach( (GALLERY, index) => {
+				console.log(GALLERY, index);
+				const rowindex = index;
+				if( rowindex % 3 == 0 ) {
+					row = document.createElement('div');
+					row.classList.add('row', 'mt-1');
+				}
 
 				let img = new Image();
 				img.classList.add("w-33");
@@ -85,7 +97,7 @@
 
 						//Create container 
 						let div = document.createElement('div');
-						div.classList.add('carousel-item');
+						div.classList.add('carousel-item', 'w-19in');
 						if( index == 1) div.classList.add('active');
 						div.append(slide);
 						carousel.append(div);
@@ -94,9 +106,12 @@
 
 					Modal.show();
 				});
-
 				row.append(img);
-				main.append(row);
+				
+				if( rowindex % 3 == 0 ) {
+
+					main.append(row);
+				}
 			});
 
 
