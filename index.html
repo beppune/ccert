@@ -27,7 +27,7 @@
 					<div id="slides" class="carousel slide">
 						<div class="carousel-inner" id="carousel-inner">
 							
-							<!-- IMAGES PER GALLERY -->
+							<!-- IMAGES PER GALLERY_NAME -->
 
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#slides" data-bs-slide="prev">
@@ -53,37 +53,45 @@
 	</div>
 	<script>
 
-		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));;
+		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));
 		
-		function gallery(name, count) {
-			return { name, count };
-		}
-
 		window.addEventListener('load', ()=>{
 
 			const BASE_PATH = 'galleries';
-			const GALLERIES = [
-				gallery("gallery_1", 3),
-				gallery("gallery_2", 3),
-				gallery("gallery_3", 3),
-				gallery("gallery_4", 3)
-			];
+			
+			let GALERIES_DIRS = Object.keys(galleries).sort();
+			console.log(GALERIES_DIRS);
+			
+			do {
+				let GALLERY_NAME = GALERIES_DIRS.shift();
+				for( GALLERY_NAME of GALERIES_DIRS ) {
+				
+					console.log("--" + galleries[GALLERY_NAME]);
+				
+				}
 
-			let main = document.getElementById('main');
+			}while( GALERIES_DIRS.length != 0 );
+			/*let main = document.getElementById('main');
 			main.classList.add('container')
-			let row;
-			GALLERIES.forEach( (GALLERY, index) => {
-				console.log(GALLERY, index);
-				const rowindex = index;
+			
+			let GALLERY_NAME = GALERIES_DIRS.shift();
+			let rowindex = 0;
+			while(GALLERY_NAME !== undefined) {
+				let row;
+			
 				if( rowindex % 3 == 0 ) {
 					row = document.createElement('div');
 					row.classList.add('row', 'mt-1');
 				}
-
+				
+				let IMAGES = galleries[GALLERY_NAME];
+				
+				
+				let front_image = IMAGES.shift();
 				let img = new Image();
 				img.classList.add("w-33");
 				img.setAttribute('role','button');
-				img.src = `${BASE_PATH}/${GALLERY.name}.jpg`;
+				img.src = `${BASE_PATH}/${GALLERY_NAME}/${front_image}`;
 				img.addEventListener('click', ()=>{
 
 					let carousel = document.getElementById('carousel-inner');
@@ -92,10 +100,10 @@
 					while (carousel.firstChild) carousel.removeChild(carousel.firstChild);
 
 					
-					for (let index = 1; index <= GALLERY.count; index++) {
+					for (let index = 0; index <= IMAGES.length; index++) {
 						let slide = new Image();
 						slide.classList.add("w-100");
-						slide.src = `${BASE_PATH}/${GALLERY.name}/image_${index}.jpg`;
+						slide.src = `${BASE_PATH}/${GALLERY_NAME}/${IMAGES[index]}`;
 
 						//Create container 
 						let div = document.createElement('div');
@@ -114,9 +122,10 @@
 
 					main.append(row);
 				}
-			});
-
-
+				
+				rowindex++;
+				GALLERY_NAME = GALERIES_DIRS.shift();
+			}*/
 		});
 
 	</script>
