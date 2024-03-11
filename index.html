@@ -56,42 +56,31 @@
 		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));
 		
 		window.addEventListener('load', ()=>{
+		
+			let main = document.getElementById('main');
+			main.classList.add('container');
+			
+			let row = document.createElement('div');
+			row.classList.add('row', 'mt-1');
 
 			const BASE_PATH = 'galleries';
 			
 			let GALERIES_DIRS = Object.keys(galleries).sort();
-			console.log(GALERIES_DIRS);
 			
 			do {
-				let GALLERY_NAME = GALERIES_DIRS.shift();
-				for( GALLERY_NAME of GALERIES_DIRS ) {
+				const GALLERY_NAME = GALERIES_DIRS.shift();
+				console.log(name);
 				
-					console.log("--" + galleries[GALLERY_NAME]);
+				const IMAGES = galleries[GALLERY_NAME];
 				
-				}
-
-			}while( GALERIES_DIRS.length != 0 );
-			/*let main = document.getElementById('main');
-			main.classList.add('container')
-			
-			let GALLERY_NAME = GALERIES_DIRS.shift();
-			let rowindex = 0;
-			while(GALLERY_NAME !== undefined) {
-				let row;
-			
-				if( rowindex % 3 == 0 ) {
-					row = document.createElement('div');
-					row.classList.add('row', 'mt-1');
-				}
+				const front_image = IMAGES.shift();
 				
-				let IMAGES = galleries[GALLERY_NAME];
-				
-				
-				let front_image = IMAGES.shift();
-				let img = new Image();
+				const img = new Image();
 				img.classList.add("w-33");
+				img.classList.add("mt-1");
 				img.setAttribute('role','button');
 				img.src = `${BASE_PATH}/${GALLERY_NAME}/${front_image}`;
+				
 				img.addEventListener('click', ()=>{
 
 					let carousel = document.getElementById('carousel-inner');
@@ -108,24 +97,23 @@
 						//Create container 
 						let div = document.createElement('div');
 						div.classList.add('carousel-item', 'w-19in');
-						if( index == 1) div.classList.add('active');
+						if( index == 0) div.classList.add('active');
 						div.append(slide);
+						
 						carousel.append(div);
 
 					}
 
 					Modal.show();
 				});
+				
 				row.append(img);
 				
-				if( rowindex % 3 == 0 ) {
-
-					main.append(row);
-				}
-				
-				rowindex++;
-				GALLERY_NAME = GALERIES_DIRS.shift();
-			}*/
+			} while( GALERIES_DIRS.length != 0 );
+			
+			
+			main.append(row);
+			
 		});
 
 	</script>
