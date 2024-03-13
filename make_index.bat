@@ -13,10 +13,12 @@ if not -%1-==-- set GALLERIES_DIR=%1
 del /f /q %INDEX_FILENAME%
 
 echo //AUTOGENERATO! NON MODIFICARE A MANO >> %INDEX_FILENAME%
+echo const BASE_PATH = '%GALLERIES_DIR%'; >> %INDEX_FILENAME%
 echo let galleries = {}; >> %INDEX_FILENAME%
 
 
 :: Search for galleries
+dir %GALLERIES_DIR% /AD /B
 
 for /f %%g in ('dir %GALLERIES_DIR% /AD /B') do call :gallery_loop %%g
 
