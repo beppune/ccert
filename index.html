@@ -16,7 +16,7 @@
 	
 	<script src="gallery_index.js"></script>
 </head>
-<body>
+<body class="vh-100">
 	<div class="modal" id="carousel">
 		<div class="modal-dialog modal-fullscreen" keyboard>
 			<div class="modal-content">
@@ -25,7 +25,7 @@
 					<!-- SLIDES -->
 
 					<div id="slides" class="carousel slide">
-						<div class="carousel-inner" id="carousel-inner">
+						<div class="carousel-inner align-items-stretch" id="carousel-inner">
 							
 							<!-- IMAGES PER GALLERY_NAME -->
 
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 
-	<div id="main" class="container-fluid mx-auto mt-2">
+	<div id="main" class="h-100 container-fluid mx-auto mt-2">
 		
 	</div>
 	<script>
@@ -61,7 +61,7 @@
 			main.classList.add('container');
 			
 			let row = document.createElement('div');
-			row.classList.add('row', 'mt-1');
+			row.classList.add('row', 'h-100', 'justify-content-center', 'mt-1');
 
 			//const BASE_PATH = 'galleries';
 			
