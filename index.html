@@ -94,13 +94,16 @@
 						slide.classList.add("w-100");
 						slide.src = `${BASE_PATH}/${GALLERY_NAME}/${IMAGES[index]}`;
 
-						//Create container 
-						let div = document.createElement('div');
-						div.classList.add('carousel-item', 'w-19in');
-						if( index == 0) div.classList.add('active');
-						div.append(slide);
-						
-						carousel.append(div);
+						if( IMAGES[index] !== undefined ) {
+							
+							//Create container 
+							let div = document.createElement('div');
+							div.classList.add('carousel-item', 'w-19in');
+							if( index == 0) div.classList.add('active');
+							div.append(slide);
+							
+							carousel.append(div);
+						}
 
 					}
 
