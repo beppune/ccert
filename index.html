@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ciaone</title>
+	<title>Certificazioni</title>
 	<link rel="stylesheet" href="bootstrap.min.css" />
 	<script src="bootstrap.bundle.min.js"></script>
 	<style>
@@ -11,6 +11,16 @@
 
 		.w-19in {
 			width: 1280px;
+		}
+
+		body {
+			background-color: #EEDC00;
+		}
+
+		.homebutton {
+			background-color: #003895;
+			color: #EEDC00;
+			font-weight: bold;
 		}
 	</style>
 	
@@ -43,7 +53,7 @@
 					<!-- /SLIDES-->
 
 				</div>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Home</button>
+				<button type="button" class="btn homebutton" data-bs-dismiss="modal">Torna all'inizio</button>
 			</div>
 		</div>
 	</div>
@@ -53,7 +63,17 @@
 	</div>
 	<script>
 
+		const slideFullHeigh = true;
+
 		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));
+
+		if(slideFullHeigh) {
+			document.getElementById('slides')
+				.classList.add('h-100');
+
+			document.getElementById('carousel-inner')
+				.classList.add('h-100');
+		}
 		
 		window.addEventListener('load', ()=>{
 		
@@ -93,11 +113,22 @@
 						slide.classList.add("w-100");
 						slide.src = `${BASE_PATH}/${GALLERY_NAME}/${IMAGES[index]}`;
 
+						if(slideFullHeigh) {
+							slide.classList.remove('w-100');
+							slide.classList.add('h-100');
+							slide.style.marginLeft = '330px';
+						}
+
 						if( IMAGES[index] !== undefined ) {
 							
 							//Create container 
 							let div = document.createElement('div');
 							div.classList.add('carousel-item', 'w-19in');
+							
+							if(slideFullHeigh) {
+								div.classList.add('h-100');
+							}
+
 							if( index == 0) div.classList.add('active');
 							div.append(slide);
 							
