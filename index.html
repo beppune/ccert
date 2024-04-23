@@ -4,6 +4,7 @@
 	<title>Certificazioni</title>
 	<link rel="stylesheet" href="bootstrap.min.css" />
 	<script src="bootstrap.bundle.min.js"></script>
+	<script src="config.js"></script>
 	<style>
 		.w-33 {
 			width: 33%;
@@ -63,7 +64,7 @@
 	</div>
 	<script>
 
-		const slideFullHeigh = true;
+		const slideFullHeigh = config['slideFullHeigh'];
 
 		window.Modal = new bootstrap.Modal(document.getElementById('carousel', { }));
 
