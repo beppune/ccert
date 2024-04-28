@@ -98,9 +98,10 @@
 		window.addEventListener('load', ()=>{
 		
 			let main = document.getElementById('main');
-			let gallery = document.getElementById('gallery');
-			
 			let row = document.getElementById('main-row');
+
+			let gallery = document.getElementById('gallery');
+			let galleryRow = document.getElementById('gallery-row');
 
 			let galleryBtn = document.getElementById('gallery-button');
 			galleryBtn.addEventListener('click', ()=>{
@@ -112,11 +113,10 @@
 			
 			do {
 				const GALLERY_NAME = GALERIES_DIRS.shift();
-				console.log(name);
 				
 				const IMAGES = galleries[GALLERY_NAME];
 				
-				const front_image = IMAGES.shift();
+				const front_image = IMAGES[0];
 				
 				const img = new Image();
 				img.classList.add("w-33");
@@ -125,6 +125,18 @@
 				row.append(img);
 
 				img.addEventListener('click', ()=>{
+					galleryRow.replaceChildren();
+
+					for (let index = 0; index < IMAGES.length; index++) {
+						const link = IMAGES[index];
+						
+						let gImage = new Image();
+						gImage.style.width = '150px';
+						gImage.setAttribute('role','button');
+						gImage.src = `${BASE_PATH}/${GALLERY_NAME}/${link}`;
+
+						galleryRow.append(gImage);
+					}
 
 					hide(main);
 					show(gallery);
