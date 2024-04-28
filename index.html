@@ -59,8 +59,10 @@
 		</div>
 	</div>
 
-	<div id="main" class="h-100 container-fluid mx-auto mx-0">
-		
+	<div id="main" class="h-100 container container-fluid mx-auto mx-0">
+		<div id="main-row" class="row h-100 justify-content-center my-0 align-items-center">
+
+		</div>
 	</div>
 	<div id="gallery" class="h-100 container-fluid mx-auto mx-0 d-none">
 		
@@ -82,12 +84,8 @@
 		window.addEventListener('load', ()=>{
 		
 			let main = document.getElementById('main');
-			main.classList.add('container');
 			
-			let row = document.createElement('div');
-			row.classList.add('row', 'h-100', 'justify-content-center', 'my-0', 'align-items-center');
-
-			//const BASE_PATH = 'galleries';
+			let row = document.getElementById('main-row');
 			
 			let GALERIES_DIRS = Object.keys(galleries).sort();
 			
@@ -103,7 +101,12 @@
 				img.classList.add("w-33");
 				img.setAttribute('role','button');
 				img.src = `${BASE_PATH}/${GALLERY_NAME}/${front_image}`;
-				
+				row.append(img);
+
+				img.addEventListener('click', ()=>{
+					hide()
+				});
+
 				/*
 				img.addEventListener('click', ()=>{
 
@@ -145,12 +148,9 @@
 					Modal.show();
 				});
 				*/
-				row.append(img);
 				
 			} while( GALERIES_DIRS.length != 0 );
 			
-			
-			main.append(row);
 			
 		});
 
