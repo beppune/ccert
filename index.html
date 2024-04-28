@@ -14,7 +14,7 @@
 			width: 1280px;
 		}
 
-		body {
+		.bg-color {
 			background-color: #EEDC00;
 		}
 
@@ -31,8 +31,8 @@
 	
 	<script src="gallery_index.js"></script>
 </head>
-<body class="vh-100">
-	<div class="modal" id="carousel">
+<body class="vh-100 bg-color">
+	<div class="modal bg-color" id="carousel">
 		<div class="modal-dialog modal-fullscreen" keyboard>
 			<div class="modal-content">
 				<div class="modal-body">
@@ -81,6 +81,49 @@
 
 		function hide(div) {
 			div.classList.add('d-none');
+		}
+
+		function addCarouselListener(img, GALLERY_NAME, IMAGES) {
+
+			img.addEventListener('click', ()=>{
+
+			let carousel = document.getElementById('carousel-inner');
+
+			//Empty previous gallery content
+			while (carousel.firstChild) carousel.removeChild(carousel.firstChild);
+
+			for (let index = 0; index <= IMAGES.length; index++) {
+				let slide = new Image();
+				slide.classList.add("w-100");
+				slide.src = `${BASE_PATH}/${GALLERY_NAME}/${IMAGES[index]}`;
+
+				if(slideFullHeigh) {
+					slide.classList.remove('w-100');
+					slide.classList.add('h-100');
+					slide.style.marginLeft = '330px';
+				}
+
+				if( IMAGES[index] !== undefined ) {
+					
+					//Create container 
+					let div = document.createElement('div');
+					div.classList.add('carousel-item', 'w-19in');
+					
+					if(slideFullHeigh) {
+						div.classList.add('h-100');
+					}
+
+					if( slide.src === img.src) div.classList.add('active');
+					if( index == 0) div.classList.add('active');
+					div.append(slide);
+					
+					carousel.append(div);
+				}
+
+			}
+
+			Modal.show();
+			});
 		}
 
 		const slideFullHeigh = config['slideFullHeigh'];
@@ -136,6 +179,8 @@
 						gImage.src = `${BASE_PATH}/${GALLERY_NAME}/${link}`;
 
 						galleryRow.append(gImage);
+
+						addCarouselListener(gImage, GALLERY_NAME, IMAGES);
 					}
 
 					hide(main);
