@@ -7,7 +7,11 @@
 	<script src="config.js"></script>
 	<style>
 		.w-33 {
-			width: 33%;
+			width: 30%;
+		}
+
+		.w-150px{
+			width: 150px;
 		}
 
 		.w-19in {
@@ -173,7 +177,13 @@
 						const link = IMAGES[index];
 						
 						let gImage = new Image();
-						gImage.style.width = '150px';
+					
+						if(IMAGES.length <= 6) {
+							gImage.classList.add('w-33');
+						} else if ( IMAGES.length <=39) {
+							gImage.classList.add('w-150px');
+						}
+
 						gImage.setAttribute('role','button');
 						gImage.src = `${BASE_PATH}/${GALLERY_NAME}/${link}`;
 
